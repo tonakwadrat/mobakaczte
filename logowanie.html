@@ -510,6 +510,49 @@
       z-index: 1000;
       opacity: 0; 
      }
+     .ios-alert-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.4);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+.ios-alert-box {
+  background-color: #e5e5ea;
+  color: #000;
+  border-radius: 20px;
+  width: 85%;
+  max-width: 300px;
+  padding: 20px;
+  text-align: center;
+  font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.25);
+}
+
+.ios-alert-text {
+  font-size: 17px;
+  margin-bottom: 20px;
+  font-weight: 500;
+}
+
+.ios-alert-button {
+  border-top: 1px solid #cfcfcf;
+  padding-top: 12px;
+  font-size: 17px;
+  color: #007aff;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.ios-alert-button:active {
+  opacity: 0.6;
+}
     </style>
 </head>
 <body>
@@ -525,25 +568,41 @@
             <a href="logowanie2.html" class="hidden-button"></a>
   </div>
 
+  <div class="ios-alert-overlay" id="iosAlert">
+  <div class="ios-alert-box">
+    <div class="ios-alert-text" id="iosAlertMessage">Nieprawidłowe hasło.</div>
+    <div class="ios-alert-button" onclick="closeIOSAlert()">OK</div>
+  </div>
+</div>
 
-      <script>
-    const correctPassword = "tona2"; // <-- Twoje hasło
+     <script>
+  const correctPassword = "tona2";
 
-    function togglePassword() {
-      const passwordInput = document.getElementById("password");
-      const isPassword = passwordInput.type === "password";
-      passwordInput.type = isPassword ? "text" : "password";
+  function togglePassword() {
+    const passwordInput = document.getElementById("password");
+    const isPassword = passwordInput.type === "password";
+    passwordInput.type = isPassword ? "text" : "password";
+  }
+
+  function checkPassword() {
+    const input = document.getElementById("password").value;
+    if (input === correctPassword) {
+      window.location.href = "stronaglowna.html";
+    } else {
+      showIOSAlert("Nieprawidłowe hasło");
     }
+  }
 
-    function checkPassword() {
-      const input = document.getElementById("password").value;
-      if (input === correctPassword) {
-        window.location.href = "stronaglowna.html"; // <-- adres docelowy
-      } else {
-        alert("Niepoprawne hasło");
-      }
-    }
-  </script>
+  // Alert iOS (HTML + JS)
+  function showIOSAlert(message) {
+    document.getElementById('iosAlertMessage').innerText = message;
+    document.getElementById('iosAlert').style.display = 'flex';
+  }
+
+  function closeIOSAlert() {
+    document.getElementById('iosAlert').style.display = 'none';
+  }
+</script>
     <script>
         // Detect if running as a Web Clip and apply specific styles
         if (window.navigator.standalone) {
