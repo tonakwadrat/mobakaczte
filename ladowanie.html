@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="manifest" href="manifest.json">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <title>Strona z przekierowaniem</title>
+  <style>
+    /* Styl kontenera */
+    .container {
+  width: 100vw;
+  height: 100vh;
+  margin: 0;
+  background-color: #fff;
+  padding: env(safe-area-inset-top) 0 100px 0; /* Góra, prawo, dół, lewo */
+  box-sizing: border-box;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+    /* Styl dla kółka ładowania */
+    .loader {
+      border: 3px solid transparent; /* Przezroczyste obramowanie */
+      border-top: 3px solid #014a93; /* Kolor kółka (niebieski) */
+      border-radius: 50% 50% 0 0; /* Zaokrąglone górne rogi */
+      width: 12px; /* Mniejsze kółko */
+      height: 12px; /* Mniejsze kółko */
+      animation: spin 2s linear infinite; /* Animacja obracania kółka */
+    }
+
+    /* Animacja obracania kółka */
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+    body {
+    overflow: auto;
+    scrollbar-width: none; /* Firefox */
+  }
+
+  </style>
+  <script>
+    // Po załadowaniu strony
+    window.onload = function() {
+      setTimeout(function() {
+        window.location.href = "blad2.html";  
+      }, 10000); //ms
+    }
+  </script>
+</head>
+<body>
+
+  <!-- Kontener z kółkiem ładowania -->
+  <div class="container">
+    <!-- Kółko ładowania -->
+    <div class="loader"></div>
+  </div>
+
+</body>
+ <script>
+    if ("serviceWorker" in navigator) {
+        navigator.serviceWorker.register("/sw.js")
+            .then(() => console.log("mObywatel zainstalowany"))
+            .catch((error) => console.error("Błąd rejestracji:", error));
+    }
+</script>
+</html>

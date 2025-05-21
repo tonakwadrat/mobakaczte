@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="manifest" href="manifest.json">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <title>Strona z przekierowaniem</title>
+  <style>
+    /* Styl kontenera */
+    .container {
+      width: 100%;
+      max-width: 414px;
+      height: 100vh;
+      margin: 0 auto;
+      background-color: #fff;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      padding: 16px;
+      box-sizing: border-box;
+      padding-bottom: 100px; /* Dostosowana przestrzeń dla przyklejonego dolnego paska */
+      padding-top: env(safe-area-inset-top); /* Uwzględnienie notcha */
+      padding-top: 10px;
+      display: flex; /* Flexbox, żeby centrować zawartość */
+      justify-content: center; /* W poziomie */
+      align-items: center; /* W pionie */
+      position: relative;
+    }
+
+    /* Styl dla kółka ładowania */
+    .loader {
+      border: 3px solid transparent; /* Przezroczyste obramowanie */
+      border-top: 3px solid #014a93; /* Kolor kółka (niebieski) */
+      border-radius: 50% 50% 0 0; /* Zaokrąglone górne rogi */
+      width: 12px; /* Mniejsze kółko */
+      height: 12px; /* Mniejsze kółko */
+      animation: spin 2s linear infinite; /* Animacja obracania kółka */
+    }
+
+    /* Animacja obracania kółka */
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+    body {
+    overflow: auto;
+    scrollbar-width: none; /* Firefox */
+  }
+
+  </style>
+  <script>
+    // Po załadowaniu strony
+    window.onload = function() {
+      // Czekamy 5 sekund (5000 ms), po czym przekierowujemy użytkownika na inną stronę
+      setTimeout(function() {
+        window.location.href = "mDowód.html";  // Nowy adres, na który ma przejść użytkownik
+      }, 2200); // 2200 ms = 2.2 sekund
+    }
+  </script>
+</head>
+<body>
+
+  <!-- Kontener z kółkiem ładowania -->
+  <div class="container">
+    <!-- Kółko ładowania -->
+    <div class="loader"></div>
+  </div>
+ <script>
+    if ("serviceWorker" in navigator) {
+        navigator.serviceWorker.register("/sw.js")
+            .then(() => console.log("mObywatel zainstalowany"))
+            .catch((error) => console.error("Błąd rejestracji:", error));
+    }
+</script>
+</body>
+</html>
