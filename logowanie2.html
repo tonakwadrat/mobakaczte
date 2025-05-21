@@ -472,6 +472,49 @@
       z-index: 1000;
       opacity: 0; 
      }
+     .ios-alert-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.4);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+.ios-alert-box {
+  background-color: #e5e5ea;
+  color: #000;
+  border-radius: 20px;
+  width: 85%;
+  max-width: 300px;
+  padding: 20px;
+  text-align: center;
+  font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.25);
+}
+
+.ios-alert-text {
+  font-size: 17px;
+  margin-bottom: 20px;
+  font-weight: 500;
+}
+
+.ios-alert-button {
+  border-top: 1px solid #cfcfcf;
+  padding-top: 12px;
+  font-size: 17px;
+  color: #007aff;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.ios-alert-button:active {
+  opacity: 0.6;
+}
    
     </style>
 </head>
@@ -481,39 +524,53 @@
             <button class="faceid-button" onclick="loginWithFaceID()"></button>
             <a href="logowanie.html" class="hidden-button"></a>
   </div>
+  <!-- Alert iOS - podróbka -->
+<div class="ios-alert-overlay" id="iosAlert">
+  <div class="ios-alert-box">
+    <div class="ios-alert-text" id="iosAlertMessage">Nieprawidłowe hasło.</div>
+    <div class="ios-alert-button" onclick="closeIOSAlert()">OK</div>
+  </div>
+</div>
 
 
 
 
 
     <script>
-    async function loginWithFaceID() {
-      // Sprawdzenie dostępności WebAuthn API (Face ID na iOS)
-      if (!window.PublicKeyCredential) {
-        alert("To urządzenie nie obsługuje Face ID");
-        return;
-      }
-
-      try {
-        // Inicjalizacja uwierzytelniania (mockowany challenge)
-        const credential = await navigator.credentials.get({
-          publicKey: {
-            challenge: new Uint8Array([1,2,3,4,5,6,7,8]), // przykładowe wyzwanie
-            timeout: 60000,
-            userVerification: "required",
-            allowCredentials: [] // puste = pozwala na każde zapisane biometryczne logowanie
-          }
-        });
-
-        // Jeśli się uda — przekieruj
-        if (credential) {
-          window.location.href = "stronaglowna.html"; // zmień na swoją stronę
-        }
-      } catch (error) {
-        // Jeśli niepowodzenie — alert systemowy
-        alert("Nieprawidłowe hasło");
-      }
+  async function loginWithFaceID() {
+    if (!window.PublicKeyCredential) {
+      showIOSAlert("To urządzenie nie obsługuje Face ID");
+      return;
     }
+
+    try {
+      const credential = await navigator.credentials.get({
+        publicKey: {
+          challenge: new Uint8Array([1,2,3,4,5,6,7,8]),
+          timeout: 60000,
+          userVerification: "required",
+          allowCredentials: []
+        }
+      });
+
+      if (credential) {
+        window.location.href = "stronaglowna.html";
+      }
+    } catch (error) {
+      showIOSAlert("Nieprawidłowe hasło");
+    }
+  }
+
+  // Funkcje alertu iOS
+  function showIOSAlert(message) {
+    document.getElementById('iosAlertMessage').innerText = message;
+    document.getElementById('iosAlert').style.display = 'flex';
+  }
+
+  function closeIOSAlert() {
+    document.getElementById('iosAlert').style.display = 'none';
+  }
+</script>
     </script>
     <script>
         // Detect if running as a Web Clip and apply specific styles
