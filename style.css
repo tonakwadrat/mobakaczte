@@ -1,0 +1,210 @@
+
+    body {
+        margin: 0;
+        padding: 0;
+    }
+
+    .photo-container {
+        position: fixed;
+        bottom: -56.25%; /* Ukryte poza ekranem */
+        left: 50%;
+        transform: translateX(-50%);
+        width: 100%;
+        max-width: 600px; /* Maksymalna szerokość zdjęcia */
+        aspect-ratio: 16 / 9;
+        transition: bottom 0.5s ease-in-out; /* Animacja wysuwania */
+        z-index: 1000;
+    }
+
+    .photo-container img {
+        width: 100%;
+        height: auto;
+        object-fit: cover;
+        border-radius: 8px; /* Zaokrąglone rogi zdjęcia */
+    }
+
+    .action-button {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        padding: 10px;
+        margin: 20px auto;
+        background-color: #007BFF;
+        color: white;
+        width: fit-content;
+        border-radius: 5px;
+        transition: background-color 0.3s ease;
+    }
+
+    .action-button:hover {
+        background-color: #0056b3;
+    }
+
+    .icon-text {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .icon-text img {
+        height: 20px;
+        width: 20px;
+    }
+
+    .arrow-icon {
+        height: 20px;
+        width: 20px;
+        margin-left: 10px;
+        transition: transform 0.3s ease;
+    }
+
+    .arrow-icon.rotated {
+        transform: rotate(180deg); /* Obrót strzałki */
+    }
+
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background-color: #f5f5f5;
+    overflow-x: hidden; /* Zapobiega przesuwaniu poziomym */
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px; /* Odstępy między sekcjami */
+    padding: 20px;
+}
+
+.image-background {
+    width: 100%;
+    height: 200px;
+    background-image: url('strona-glowna.png'); /* Podmień na ścieżkę do zdjęcia */
+    background-size: cover;
+    background-position: center;
+    border-radius: 10px;
+    margin-bottom: 20px; /* Odstęp poniżej obrazu */
+}
+
+.card-carousel-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.card-carousel {
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    width: 100%;
+    gap: 10px;
+    padding-bottom: 10px;
+}
+
+.card-carousel::-webkit-scrollbar {
+    display: none; /* Ukryj pasek przewijania poziomego */
+}
+
+.card {
+    flex: 0 0 90%; /* Kafelki wypełniają 90% szerokości ekranu */
+    max-width: 90%;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    scroll-snap-align: center;
+    overflow: hidden;
+    position: relative;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.card img {
+    width: 100%;
+    height: 150px; /* Wysokość obrazka w kafelku */
+    object-fit: cover;
+}
+
+.card-label {
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+    background-color: rgba(255, 255, 255, 0.8);
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-size: 16px;
+    font-weight: bold;
+    color: #333;
+}
+/* mDowód do przycisku z danymi*/
+/* Usunięcie podkreślenia i domyślnych stylów linku */
+a {
+    text-decoration: none; /* Usuwa podkreślenie */
+    color: inherit; /* Przypisuje kolor tekstu linku do koloru rodzica */
+}
+
+/* Upewnij się, że przycisk ma wygląd normalny, bez zmiany przy najechaniu */
+.action-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Opcjonalnie: Jeśli chcesz, aby po najechaniu nie zmieniała się ani kolor, ani wygląd */
+.action-button:hover {
+    color: inherit; /* Brak zmiany koloru przy najechaniu */
+    background-color: transparent; /* Brak zmiany tła */
+}
+
+/*Koniec przycisku*/
+
+/*dla wysuwanych danych html*/
+/* Resetowanie marginesów i paddingów */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Ustawienia dla body i html */
+html, body {
+    height: 100%;
+    width: 100%;
+    overflow: hidden; /* Ukrywa pasek przewijania dla całego okna */
+}
+
+/* Kontener dla obrazu */
+.image-container {
+    position: relative;
+    width: 100%;
+    height: 100vh; /* Ustawienie wysokości na wysokość ekranu */
+    background: url('twoje-zdjecie.jpg') no-repeat center center; /* Obraz jako tło */
+    background-size: cover; /* Ustawienie obrazu, aby wypełnił cały kontener */
+    overflow: hidden; /* Ukrywa wszelkie elementy, które wykraczają poza kontener */
+}
+
+/* Ustawienie przewijania strony w pionie na podstawie obrazu */
+body {
+    height: 200vh; /* Ustalamy wysokość strony na 2 razy wysokość ekranu (przewijanie) */
+    background: url('twoje-zdjecie.jpg') repeat-y center center; /* Powtarzający się obraz w tle */
+    background-size: cover;
+}
+
+/* konie wysuwane dane*/
+
+.bottom-nav-item {
+    text-decoration: none; /* Usuwa podkreślenie */
+    color: inherit; /* Używa domyślnego koloru */
+    cursor: pointer; /* Opcjonalne: zmiana kursora na wskaźnik */
+}
+
+.bottom-nav-item:hover,
+.bottom-nav-item:focus {
+    text-decoration: none; /* Brak podkreślenia przy najechaniu */
+}
+
+.bottom-nav-item span {
+    text-decoration: none; /* Usuwa podkreślenie z tekstu */
+}
